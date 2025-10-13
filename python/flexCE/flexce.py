@@ -93,7 +93,7 @@ def output(path, sim_id, gal, abund):
     """
     path_sim = join(path, ''.join(['sim', sim_id]))
     if not os.path.isdir(path_sim):
-        os.mkdir(path_sim)
+        os.makedirs(path_sim)
 
     pickle_write(gal, join(path_sim, ''.join(('box', sim_id, '.pck'))))
     pickle_write(abund, join(path_sim, ''.join(('ab', sim_id, '.pck'))))
@@ -114,7 +114,7 @@ def output(path, sim_id, gal, abund):
         data[e+'Fe'] = abund.xfe_all[ind]
     data['t'] = abund.t[0:n]
     data['FeH'] = abund.feh
-    outfile = stem_runs + 'ab' + sim_id + '.fits'
+    outfile = join(path_sim, ''.join(('ab' + sim_id + '.fits')))
     fits.writeto(outfile,data,overwrite=True)
 
     
