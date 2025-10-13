@@ -26,7 +26,7 @@ def read_sim_cfg(file_in):
         rate in ChemEvol instance.
 
     """
-    sim_id = file_in.split('/')[-1].strip('sim').strip('.cfg')
+    sim_id = os.path.split(file_in)[-1].strip('sim').strip('.cfg')
 
     yld_args = {}
     initialize_args = {'sim_id': sim_id}
