@@ -1,5 +1,7 @@
 from __future__ import print_function, division, absolute_import
 
+import os
+
 try:
     import ConfigParser as configparser
 except ImportError as e:
