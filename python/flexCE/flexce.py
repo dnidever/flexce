@@ -34,7 +34,8 @@ from astropy.io import fits
 try:
     file_in = sys.argv[1]
 except:
-    print 'Usage: %s parameter_file_name' % sys.argv[0]; sys.exit(1)
+    print('Usage: %s parameter_file_name' % sys.argv[0])
+    sys.exit(1)
 
 
 
@@ -121,7 +122,7 @@ f.close()
 
 # Load the inflow file
 if inflows_args['func'] == 'custom':
-    print "Reading inflow rates from = " + inflows_args['file']
+    print("Reading inflow rates from = " + inflows_args['file'])
     f = open(inflows_args['file'],'r')
     inflow_rate = []
     for line in f:
@@ -133,7 +134,7 @@ if inflows_args['func'] == 'custom':
 
 # Load the SFE file
 if 'sfe_file' in sf_args:
-    print "Reading SFE from = " + sf_args['sfe_file']
+    print("Reading SFE from = " + sf_args['sfe_file'])
     f = open(sf_args['sfe_file'],'r')
     sfe = []
     for line in f:
@@ -148,7 +149,7 @@ else:
 
 # Load the SFH file
 if 'sfh_file' in locals():
-    print "Reading SFH from = " + sfh_file
+    print("Reading SFH from = " + sfh_file)
     f = open(sfh_file,'r')
     sfh = []
     for line in f:
