@@ -41,7 +41,7 @@ class Abundances:
     def setup(self):
         """Read in atomic numbers and element abbreviations."""
         el_sym = pd.read_csv(join(self.path_yldgen, 'sym_atomicnum.txt'),
-                             delim_whitespace=True, usecols=[0, 1],
+                             sep='\s+', usecols=[0, 1],
                              names=['num', 'el'])
         self.all_atomic_num = np.array(el_sym['num'])
         self.all_elements = np.array(el_sym['el'])
@@ -81,7 +81,7 @@ class Abundances:
         """
         if source == 'lodders':
             fin = join(self.path_yldgen, 'lodders03_solar_photosphere.txt')
-            solar_ab = pd.read_csv(fin, delim_whitespace=True, skiprows=8,
+            solar_ab = pd.read_csv(fin, sep='\s+', skiprows=8,
                                    usecols=[0, 1], names=['el', 'ab'])
             self.solar_element = np.array(solar_ab['el'])
             self.solar_ab = np.array(solar_ab['ab'])

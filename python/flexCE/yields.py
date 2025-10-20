@@ -5,7 +5,7 @@ import copy
 import numpy as np
 import pandas as pd
 
-from fileio.pickle_io import pickle_read
+from .fileio.pickle_io import pickle_read
 
 
 def create_yield_grids():
@@ -102,12 +102,12 @@ class Yields:
     def load_sym(self):
         """Load isotopic and elemental symbols and masses."""
         el_sym = pd.read_csv(join(self.path_yldgen, 'sym_atomicnum.txt'),
-                             delim_whitespace=True, usecols=[0, 1],
+                             sep='\s+', usecols=[0, 1],
                              names=['num', 'el'])
         self.atomic_num = np.array(el_sym['num'])
         self.element_all = np.array(el_sym['el'])
         snii_sym = pd.read_csv(join(self.path_yldgen, 'species.txt'),
-                               delim_whitespace=True, skiprows=1,
+                               sep='\s+', skiprows=1,
                                usecols=[1, 2], names=['name', 'mass'])
         self.snii_sym = np.array(snii_sym['name'])
         self.snii_sym_mass = np.array(snii_sym['mass'])
@@ -121,7 +121,7 @@ class Yields:
     def load_bbmf(self):
         """Big bang mass fraction of isotopes from WW95/Timmies data file."""
         bbmf = pd.read_csv(join(self.path_yldgen, 'bbmf.txt'),
-                           delim_whitespace=True, skiprows=1, usecols=[1],
+                           sep='\s+', skiprows=1, usecols=[1],
                            names=['mfrac'])
         self.bbmf = np.array(bbmf['mfrac'])
 
@@ -133,7 +133,7 @@ class Yields:
         """
         if source == 'lodders':
             fin = join(self.path_yldgen, 'lodders03_solar_photosphere.txt')
-            solar_ab = pd.read_csv(fin, delim_whitespace=True, skiprows=8,
+            solar_ab = pd.read_csv(fin, sep='\s+', skiprows=8,
                                    usecols=[0, 1], names=['el', 'ab'])
             self.solar_element = np.array(solar_ab['el'])
             self.solar_ab = np.array(solar_ab['ab'])
@@ -206,7 +206,7 @@ class Yields:
         """
         self._check_yield_grids(self.path_agb)
         agb_sym = pd.read_csv(join(self.path_agb, 'species.txt'),
-                              delim_whitespace=True, skiprows=1, usecols=[1],
+                              sep='\s+', skiprows=1, usecols=[1],
                               names=['name'])
         self.agb_sym = np.array(agb_sym['name'])
         self.agb_z = pickle_read(join(self.path_yldgen, 'interp_metallicity.pck'))

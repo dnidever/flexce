@@ -10,7 +10,7 @@ import time
 import numpy as np
 import pandas as pd
 
-import utils
+from . import utils
 
 
 def integrate_power_law(exponent, bins=None):
@@ -772,7 +772,7 @@ class ChemEvol:
         if warmgas:
             filename = 'warmgas_abundance_pattern.txt'
             tmp = pd.read_csv(self.path_yldgen + filename,
-                              delim_whitespace=True, skiprows=10,
+                              sep='\s+', skiprows=10,
                               names=['el', 'ab'])
             self.warmgas_ab_pattern = np.array(tmp['ab'])
             self.mwarmgas_init = mwarmgas_init

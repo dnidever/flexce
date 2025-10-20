@@ -12,19 +12,23 @@ from __future__ import print_function, division, absolute_import
 import os
 from os.path import join
 import sys
-
 import numpy as np
-
-from fileio.cfg_io import read_sim_cfg
-from fileio.pickle_io import pickle_write
-from fileio.txt_io import txt_write
-
 from astropy.io import fits
 
-import utils
-from chemevol import ChemEvol
-from abundances import Abundances
+from .fileio.cfg_io import read_sim_cfg
+from .fileio.pickle_io import pickle_write
+from .fileio.txt_io import txt_write
+from . import utils
+from .chemevol import ChemEvol
+from .abundances import Abundances
 
+
+path_flexce = join(os.path.abspath(os.path.dirname(__file__)), '')
+path_flexce_root = os.path.join(*(path_flexce.split(os.sep)[:-2]))
+path_flexce_root = os.path.abspath(join(path_flexce, '../..'))
+path_data = join(path_flexce, 'data')
+default_config_path = join(path_flexce_root, 'config')
+default_config = read_sim_cfg(os.path.join(default_config_path,'sim0.cfg'))
 
 def evolve(yld, initialize_kws, snia_dtd_kws, inflows_kws, outflows_kws,
            warmgasres_kws, sf_kws):
@@ -119,11 +123,21 @@ def output(path, sim_id, gal, abund):
 
     
 
-if __name__ == '__main__':
+def run(config,path_out=None):
+    
+    mass_bins = utils.define_mass_bins(**config['mass_bins'])
+    ylds = utils.load_yields(path_data, config['yields'], mass_bins)
+    box = evolve(ylds, config['init'], config['dtd'], config['inflows'], config['outflows'],
+                 config['warmgas'], config['sf'])
+    ab = calc_abundances(path_data, ylds.sym, box.mgas_iso, box.survivors,
+                         box.t, box.param, box.sim_id)
+    return box,ab
 
-    path_flexce = join(os.path.abspath(os.path.dirname(__file__)), '')
-    path_flexce_root = os.path.abspath(join(path_flexce, '..'))
-    path_data = join(path_flexce, 'data')
+
+    
+# TODO (specify elements_out in config file)
+
+if __name__ == '__main__':
 
     argv = None
     if argv is None:
@@ -139,19 +153,14 @@ if __name__ == '__main__':
 
     file_in = join(path_config, fname)
 
+    # Load the config file
+    config = read_sim_cfg(file_in)
+    simulation_id = config['id']
+    
     # TODO Add try...except to handle user-defined output path
     path_out = utils.substitute_dir_in_path(path_config, 'config', 'output')
-
-    (simulation_id, yld_args, initialize_args, mass_bins_args, snia_dtd_args,
-     inflows_args, outflows_args, warmgasres_args, sf_args) = \
-        read_sim_cfg(file_in)
-    mass_bins = utils.define_mass_bins(**mass_bins_args)
-    ylds = utils.load_yields(path_data, yld_args, mass_bins)
-    box = evolve(ylds, initialize_args, snia_dtd_args, inflows_args,
-                 outflows_args, warmgasres_args, sf_args)
-    ab = calc_abundances(path_data, ylds.sym, box.mgas_iso, box.survivors,
-                         box.t, box.param, box.sim_id)
-    output(path_out, simulation_id, box, ab)    
-
     
-# TODO (specify elements_out in config file)
+    # run it
+    box,ab = run(config,path_out)
+
+    output(path_out, simulation_id, box, ab)

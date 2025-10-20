@@ -96,8 +96,12 @@ def read_sim_cfg(file_in):
                 sf_args[k.split('sf_')[1]] = v
 
     f.close()
-    return (sim_id, yld_args, initialize_args, mass_bins_args, snia_dtd_args,
-            inflows_args, outflows_args, warmgasres_args, sf_args)
+    config = {'id':sim_id, 'yields':yld_args, 'init':initialize_args,
+              'mass_bins':mass_bins_args,'dtd':snia_dtd_args,'inflows':inflows_args,
+              'outflows':outflows_args,'warmgas':warmgasres_args,'sf':sf_args}
+    return config
+    #return (sim_id, yld_args, initialize_args, mass_bins_args, snia_dtd_args,
+    #        inflows_args, outflows_args, warmgasres_args, sf_args)
 
 
 def _get_section(config, section):
