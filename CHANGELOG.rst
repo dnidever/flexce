@@ -1,4 +1,4 @@
-flexCE's Change Log
+flexce's Change Log
 ===================
 
 [1.0.1] - 2018/06/04

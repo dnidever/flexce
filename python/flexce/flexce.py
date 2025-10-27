@@ -147,7 +147,7 @@ if __name__ == '__main__':
         default_config_path = join(path_flexce_root, 'config')
         fname, path_config = utils.set_path(argv[1], default_config_path)
     except IndexError:
-        path_config = join(os.getenv('HOME'), 'flexCE', 'examples')
+        path_config = join(os.getenv('HOME'), 'flexce', 'examples')
         fname = 'sim0.cfg'
         print('\nUsing default parameters in \n{}'.format(argv[1]))
 
