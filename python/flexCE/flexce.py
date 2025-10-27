@@ -80,9 +80,9 @@ def calc_abundances(path, sym, mgas, survivors, time, parameters, sim_id):
     abund = Abundances(path, sym, mgas, survivors, time, parameters, sim_id)
     abund.load_solar_abund()
     abund.calc_abundances()
-    apogee_el = np.array(['C', 'N', 'O', 'Na', 'Mg', 'Al', 'Si', 'S',
-                          'K', 'Ca', 'Ti', 'V', 'Cr', 'Mn', 'Co', 'Ni'])
-    abund.select_elements(apogee_el)
+    #apogee_el = np.array(['C', 'N', 'O', 'Na', 'Mg', 'Al', 'Si', 'S',
+    #                      'K', 'Ca', 'Ti', 'V', 'Cr', 'Mn', 'Co', 'Ni'])
+    #abund.select_elements(apogee_el)
     return abund
 
 
