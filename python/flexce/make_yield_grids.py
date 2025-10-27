@@ -39,7 +39,7 @@ def make_yield_grids(make_ww95=False):
     for k in sorted(ylds.keys()):
         py_file = k + '_yields.py'
         pck_file = 'interp_yields.pck'
-        path = k + '/'
+        path = [k]
         if k == 'busso01':
             pck_file = 'busso01_yields.pck'
         elif k == 'cescutti06':
@@ -47,19 +47,19 @@ def make_yield_grids(make_ww95=False):
         elif k == 'iwamoto99':
             pck_file = 'w70_yields.pck'
         elif k == 'karakas10':
-            path = path + 'iso_yields/'
+            path = path + ['iso_yields']
         if k == 'limongi06':
             py_file = 'limongi_chieffi_yields.py'
-            path = path + 'iso_yields/'
+            path = path + ['iso_yields']
         elif k == 'sneden08':
             py_file = 'sneden08.py'
             pck_file = 'sneden08.pck'
             path = 'general/'
         elif k == 'ww95':
-            path = path + 'half_fe/'
+            path = path + ['half_fe']
             ylds[k]['script'] = py_file
             ylds[k]['pck'] = pck_file
-            ylds[k]['path'] = path
+            ylds[k]['path'] = os.path.join(path)
 
 
     keys = ['limongi06', 'ww95']
