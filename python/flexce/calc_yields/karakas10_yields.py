@@ -57,13 +57,13 @@ from pickle_io import pickle_write
 # star, and then add the net yield (K10 call this the "net yield" in their data
 # table), which can be negative for species that are destroyed.
 
-data = pd.read_csv(join(path_k10, 'tablea2.dat'), delim_whitespace=True,
+data = pd.read_csv(join(path_k10, 'tablea2.dat'), sep='\s+',
                    usecols=[3, 4], names=['spec', 'at_mass'])
 species = np.array(data.spec)[:77]
 atomic_mass = np.array(data.at_mass)[:77]
 
 cols = ['mgrid', 'zgrid', 'mrem', 'yield', 'mlost', 'minit']
-kwargs = dict(delim_whitespace=True, usecols=(0, 1, 2, 5, 6, 7), names=cols)
+kwargs = dict(sep='\s+', usecols=(0, 1, 2, 5, 6, 7), names=cols)
 z22tab = np.array(pd.read_csv(join(path_k10, 'tablea2.dat'), **kwargs)).T
 z83tab = np.array(pd.read_csv(join(path_k10, 'tablea3.dat'), **kwargs)).T
 z43tab = np.array(pd.read_csv(join(path_k10, 'tablea4.dat'), **kwargs)).T

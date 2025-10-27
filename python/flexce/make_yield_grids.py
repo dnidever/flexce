@@ -16,7 +16,7 @@ from os.path import join
 import sys
 
 # ----- Set paths -----
-path_flexce = join(os.path.abspath('.'), '')
+path_flexce = os.path.dirname(os.path.abspath(__file__))
 path_data = join(path_flexce, 'data')
 path_yields = join(path_data, 'yields')
 path_calc_yields = join(path_flexce, 'calc_yields')
@@ -25,7 +25,7 @@ path_calc_yields = join(path_flexce, 'calc_yields')
 def make_yield_grids(make_ww95=False):
 
     print('\nGenerating pickled yield grids...\n')
-
+    
     ylds = {
         'busso01': {},
         'cescutti06': {},
@@ -54,12 +54,12 @@ def make_yield_grids(make_ww95=False):
         elif k == 'sneden08':
             py_file = 'sneden08.py'
             pck_file = 'sneden08.pck'
-            path = 'general/'
+            path = ['general']
         elif k == 'ww95':
             path = path + ['half_fe']
-            ylds[k]['script'] = py_file
-            ylds[k]['pck'] = pck_file
-            ylds[k]['path'] = os.path.join(path)
+        ylds[k]['script'] = py_file
+        ylds[k]['pck'] = pck_file
+        ylds[k]['path'] = os.path.join(*path)
 
 
     keys = ['limongi06', 'ww95']
