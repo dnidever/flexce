@@ -42,7 +42,7 @@ sys.path.append(path_fileio)
 
 #from pickle_io import pickle_read
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write,pickle_read
+from ..fileio.pickle_io import pickle_write,pickle_read
 
 if not os.path.isdir(path_ww95_orig):
     os.mkdir(path_ww95_orig)
@@ -439,6 +439,8 @@ def run():
     # pickle_write(ww95_final_rem_half_fe_only, join(path_ww95_half_fe_only,
     #                                                'interp_mremnant.pck'))
 
+    print('Writing ww95 yield files to',path_yldgen)
+    
     # generic Big Bang Mass Fraction of isotopes
     if not os.path.isfile(join(path_yldgen, 'bbmf.txt')):
         bbmf_out = np.zeros(len(species))

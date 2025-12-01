@@ -2,7 +2,7 @@ import os
 import sys
 import shutil
 from setuptools import setup, find_packages, find_namespace_packages
-from setuptools.command.install import install
+#from setuptools.command.install import install
 #from distutils.core import setup
 
 #NAME = 'flexce'

@@ -33,7 +33,7 @@ sys.path.append(path_fileio)
 # -------------------
 
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write
+from ..fileio.pickle_io import pickle_write
 
 def run():
 
@@ -451,6 +451,8 @@ def run():
         lc_final_rem[i] = m_ave_high - lc_final_mej[i]
 
 
+    print('Writing limongi/chieffi yield files to',path_lc06)
+        
     # pickle the interpolated yields array and the metallicity grid used
     pickle_write(z_final, join(path_yldgen, 'interp_metallicity.pck'))
     pickle_write(lc_final, join(path_lc06, 'interp_yields.pck'))

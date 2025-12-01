@@ -29,7 +29,7 @@ sys.path.append(path_fileio)
 
 #from pickle_io import pickle_read
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write,pickle_read
+from ..fileio.pickle_io import pickle_write,pickle_read
 
 def run():
 
@@ -95,5 +95,7 @@ def run():
 
     # -----------------------------
 
+    print('Writing cescutti06 yield files to',path_c06)
+    
     # pickle the interpolated yields array and the metallicity grid used
     pickle_write(c06_final, join(path_c06, 'cescutti06_yields.pck'))

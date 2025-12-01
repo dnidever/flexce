@@ -28,7 +28,8 @@ sys.path.append(path_fileio)
 
 #from pickle_io import pickle_read
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write,pickle_read
+#from flexce.fileio.pickle_io import pickle_write,pickle_read
+from ..fileio.pickle_io import pickle_write,pickle_read
 
 def run():
 
@@ -147,6 +148,7 @@ def run():
     #-----------------------------
 
     # pickle the interpolated yields array and the metallicity grid used
+    print('Writing busso01 yield files to',path_b01)
     pickle_write(b01_final, join(path_b01, 'busso01_yields.pck'))
     pickle_write(b01_final_ext, join(path_b01, 'busso01ext_yields.pck'))
     pickle_write(z_final3, join(path_b01, 'busso01ext_metallicity.pck'))

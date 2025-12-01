@@ -22,7 +22,7 @@ sys.path.append(path_fileio)
 # -------------------
 
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write
+from ..fileio.pickle_io import pickle_write
 
 def run():
 
@@ -90,6 +90,8 @@ def run():
                     snia_yields[k][j] = i99[k].iloc[np.where(snia_sym == species[j])]
 
 
+    print('Writing iwamoto99 yield files to',path_i99)
+                    
     # write to file
     for k in snia_yields.keys():
         pickle_write(snia_yields[k], join(path_i99, k + '_yields.pck'))

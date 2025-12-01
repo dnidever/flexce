@@ -23,7 +23,7 @@ sys.path.append(path_fileio)
 # -------------------
 
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write
+from ..fileio.pickle_io import pickle_write
 
 def run():
 
@@ -73,5 +73,6 @@ def run():
         else:
             s08[e]['isotopic_fraction[s]'] = np.zeros(len(s08[e]['N[s]']))
 
-
+    print('Writing sneden08 yield files to',path_yldgen)
+            
     pickle_write(s08, join(path_yldgen, 'sneden08.pck'))

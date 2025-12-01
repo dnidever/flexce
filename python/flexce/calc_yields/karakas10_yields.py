@@ -29,7 +29,7 @@ sys.path.append(path_fileio)
 #-------------------
 
 #from pickle_io import pickle_write
-from flexCE.fileio.pickle_io import pickle_write
+from ..fileio.pickle_io import pickle_write
 
 def run():
 
@@ -307,6 +307,8 @@ def run():
                                k10_final_mej[:, i])
 
 
+    print('Writing karakas10 yield files to',path_k10)
+        
     # pickle the interpolated yields array and the metallicity grid used
     pickle_write(k10_final, join(path_k10, 'interp_yields.pck'))
     pickle_write(k10_final_mej, join(path_k10, 'interp_meject.pck'))
