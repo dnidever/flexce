@@ -24,10 +24,8 @@ from .abundances import Abundances
 
 
 path_flexce = join(os.path.abspath(os.path.dirname(__file__)), '')
-path_flexce_root = os.path.join(*(path_flexce.split(os.sep)[:-2]))
-path_flexce_root = os.path.abspath(join(path_flexce, '../..'))
 path_data = join(path_flexce, 'data')
-default_config_path = join(path_flexce_root, 'config')
+default_config_path = join(path_flexce, 'config')
 default_config = read_sim_cfg(os.path.join(default_config_path,'sim0.cfg'))
 
 def evolve(yld, initialize_kws, snia_dtd_kws, inflows_kws, outflows_kws,
@@ -145,7 +143,7 @@ if __name__ == '__main__':
         default_config_path = join(path_flexce_root, 'config')
         fname, path_config = utils.set_path(argv[1], default_config_path)
     except IndexError:
-        path_config = join(os.getenv('HOME'), 'flexCE', 'examples')
+        path_config = join(os.getenv('HOME'), 'flexce', 'examples')
         fname = 'sim0.cfg'
         print('\nUsing default parameters in \n{}'.format(argv[1]))
 

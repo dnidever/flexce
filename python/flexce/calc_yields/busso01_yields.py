@@ -32,7 +32,7 @@ from .fileio.pickle_io import pickle_write,pickle_read
 
 # ---- Load Data ----
 data_in = pd.read_csv(join(path_b01, 'busso01_sprocess.txt'),
-                      delim_whitespace=True, skiprows=4,
+                      sep='\s+', skiprows=4,
                       names=['Z', 'M1.5', 'M3.0'])
 z_b01 = np.array(data_in['Z'])
 xba_b01 = np.array(data_in[['M1.5', 'M3.0']]).T

@@ -33,7 +33,7 @@ from .fileio.pickle_io import pickle_write,pickle_read
 
 # ---- Load Data ----
 data_in = pd.read_csv(join(path_c06, 'cescutti06_rprocess.txt'),
-                      delim_whitespace=True, skiprows=5,
+                      sep='\s+', skiprows=5,
                       names=['M', 'XBa', 'XEu'])
 m_c06 = np.array(data_in['M'])
 x_c06 = np.array(data_in[['XBa', 'XEu']]).T

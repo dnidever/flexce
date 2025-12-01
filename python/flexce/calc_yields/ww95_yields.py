@@ -111,7 +111,7 @@ n_yield = len(ww95_orig)
 
 # ---- CL04 Data ----
 species_in = pd.read_csv(join(path_yldgen, 'species.txt'),
-                         delim_whitespace=True, skiprows=1, usecols=[1],
+                         sep='\s+', skiprows=1, usecols=[1],
                          names=['name'])
 species = np.array(species_in['name'])
 n_species = len(species)
@@ -133,7 +133,7 @@ ind_sp = np.array(ind_sp)
 # of the stellar models (also assume Y = 0.285)---in relative amounts (not
 # Msun), that is, sum(solar_ab) = 1.
 solar_isotopes = pd.read_csv(join(path_yldgen, 'Solar_isotopes.txt'),
-                             delim_whitespace=True, skiprows=1,
+                             sep='\s+', skiprows=1,
                              usecols=[0, 1], names=['name', 'ab'])
 solar_iso = np.array(solar_isotopes['name'])
 solar_ab = np.array(solar_isotopes['ab'])

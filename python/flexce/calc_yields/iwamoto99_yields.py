@@ -40,13 +40,13 @@ cdd2:
 # Read in yields
 snia_in = join(path_i99, 'iwamoto99.txt')
 cols = ['sym_in', 'w7', 'w70', 'wdd1', 'wdd2', 'wdd3', 'cdd1', 'cdd2']
-i99 = pd.read_csv(snia_in, delim_whitespace=True, skiprows=2,
+i99 = pd.read_csv(snia_in, sep='\s+', skiprows=2,
                   usecols=[0, 2, 3, 4, 5, 6, 7, 8], names=cols)
 snia_sym = np.array([''.join((item[2:], item[:2])) for item in i99.sym_in])
 
 # Read in isotopes
 species_in = pd.read_csv(join(path_yldgen, 'species.txt'),
-                         delim_whitespace=True, skiprows=1, usecols=[1],
+                         sep='\s+', skiprows=1, usecols=[1],
                          names=['name'])
 species = np.array(species_in['name'])
 n_species = len(species)
@@ -63,7 +63,7 @@ elements = np.array(elements)
 
 # Solar abundances are prevalence "by mass"
 solar_isotopes = pd.read_csv(join(path_yldgen, 'Solar_isotopes.txt'),
-                             delim_whitespace=True, skiprows=1,
+                             sep='\s+', skiprows=1,
                              usecols=[0, 1], names=['name', 'ab'])
 solar_iso = np.array(solar_isotopes['name'])
 solar_ab = np.array(solar_isotopes['ab'])

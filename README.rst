@@ -1,5 +1,5 @@
 ======
-flexCE
+flexce
 ======
 A flexible Chemical Evolution model in python
 ---------------------------------------------
@@ -24,18 +24,18 @@ Python Versions and Dependencies
 Installation
 ^^^^^^^^^^^^
 
-Choose a location for flexCE to live. We'll assume that it's in your home
+Choose a location for flexce to live. We'll assume that it's in your home
 directory ("~/").
 
 ::
 
-    cd ~/flexCE
+    cd ~/flexce
      python setup.py install
 
 
 **Generate yields**::
 
-    cd ~/flexCE/flexCE/
+    cd ~/flexce/flexce/
      python make_yield_grids.py
 
 
@@ -43,7 +43,7 @@ Run the code
 ^^^^^^^^^^^^
 ::
 
-    cd ~/flexCE/flexCE/
+    cd ~/flexce/flexce/
      python flexce.py ../config/sim0.cfg
 
 
@@ -59,13 +59,13 @@ Run the code
 
 **Plot [O/Fe]-[Fe/H]**::
 
-    cd flexCE/flexCE/plot
+    cd flexce/flexce/plot
      python plot_xfe_feh.py ofe_feh_sim0.cfg
 
 
 **Go to output plot directory**::
 
-    cd flexCE/plots/plots
+    cd flexce/plots/plots
 
 
 
@@ -73,7 +73,7 @@ License
 ^^^^^^^
 Copyright 2016 Brett Andrews.
 
-flexCE is free software made available under the MIT License. For details see
+flexce is free software made available under the MIT License. For details see
 the LICENSE file.
 
 

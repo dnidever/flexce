@@ -88,7 +88,7 @@ for i in range(len(input_M_lc06)):
 # of the stellar models (also assume Y = 0.285)---in relative amounts (not
 # Msun), that is, sum(solar_ab) = 1.
 solar_isotopes = pd.read_csv(join(path_yldgen, 'Solar_isotopes.txt'),
-                             delim_whitespace=True, skiprows=1,
+                             sep='\s+', skiprows=1,
                              usecols=[0, 1], names=['name', 'ab'])
 solar_iso = np.array(solar_isotopes['name'])
 solar_ab = np.array(solar_isotopes['ab'])
@@ -126,7 +126,7 @@ mass_ni56 = 0.1 # mass of ni56 produced
 species = np.array([])
 for j in range(cl04_files.shape[1]):
     itmp = pd.read_csv(join(path_cl04, cl04_files[0, j]),
-                       delim_whitespace=True)
+                       sep='\s+')
     species = np.concatenate((species, np.array(itmp.columns)[1:]))
 
 species = species[:-3]
@@ -148,7 +148,7 @@ cl04_ni56 = []
 cl04_abs_010ni = []
 for i in range(len(cl04_files)):
     # read in mass cuts and ni56 yields
-    nitmp = pd.read_csv(join(path_cl04, cl04_nik[i]), delim_whitespace=True,
+    nitmp = pd.read_csv(join(path_cl04, cl04_nik[i]), sep='\s+',
                         names=['mcut', 'ni56'])
     cl04_mcut.append(np.array(nitmp.mcut))
     cl04_ni56.append(np.array(nitmp.ni56))
@@ -160,7 +160,7 @@ for i in range(len(cl04_files)):
         # surface of the star, which is not present in the nickel yield files
         # (e.g., z00m13.nik)
         qtmp0 = pd.read_csv(join(path_cl04, cl04_files[i, j]),
-                            delim_whitespace=True)
+                            sep='\s+')
         qtmp = np.array(qtmp0.iloc[1:])  # skip first row (surface of star)
         if j == cl04_files.shape[1] - 1:
             qtmp = qtmp[:, :-3]
@@ -229,7 +229,7 @@ lc06_ni56 = []
 lc06_abs_010ni = []
 for i in range(len(lc06_files)):
     tmp = np.array(pd.read_csv(join(path_lc06, lc06_files[i]),
-                               delim_whitespace=True))
+                               sep='\s+'))
     # see note above about calculating cumulative mass ejected
     cum_yld_tmp = np.cumsum(np.multiply(np.diff(tmp[:, 0]),
                                         tmp[1:, 2:].T) * -1, axis=1).T
@@ -239,7 +239,7 @@ for i in range(len(lc06_files)):
     # read in ni56 mass produced from elemental yield file (mass coordinate
     # stars at center and goes outward---opposite to isotopic yield files)
     tmp2 = np.array(pd.read_csv(join(path_lc06_el, lc06_el_files[i]),
-                                delim_whitespace=True, header=None))
+                                sep='\s+', header=None))
     lc06_ni56.append(tmp2[:, -1][::-1])
     # interpolate between the yields from different mass cuts such that 0.05
     # Msun of Ni56 produced
