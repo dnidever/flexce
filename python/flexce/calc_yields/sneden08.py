@@ -23,53 +23,55 @@ sys.path.append(path_fileio)
 # -------------------
 
 #from pickle_io import pickle_write
-from ..fileio.pickle_io import pickle_write
+from flexCE.fileio.pickle_io import pickle_write
 
-# ----- Load Data -----
-s08 = {}
-fin = open(join(path_yldgen, 'sneden08.txt'), 'r')
-for line in fin:
-    if line.split()[0] == '#':
-        pass
-    else:
-        cols = line.strip().split()
-        if len(cols) == 5:
-            name, at_num, at_mass, ns, nr = cols
-            s08[name] = {'element': name, 'Z': int(at_num),
-                         'Isotope': [int(at_mass)], 'N[s]': [float(ns)],
-                         'N[r]': [float(nr)]}
+def run():
+
+    # ----- Load Data -----
+    s08 = {}
+    fin = open(join(path_yldgen, 'sneden08.txt'), 'r')
+    for line in fin:
+        if line.split()[0] == '#':
+            pass
         else:
-            at_mass, ns, nr = cols
-            s08[name]['Isotope'].append(int(at_mass))
-            s08[name]['N[s]'].append(float(ns))
-            s08[name]['N[r]'].append(float(nr))
+            cols = line.strip().split()
+            if len(cols) == 5:
+                name, at_num, at_mass, ns, nr = cols
+                s08[name] = {'element': name, 'Z': int(at_num),
+                             'Isotope': [int(at_mass)], 'N[s]': [float(ns)],
+                             'N[r]': [float(nr)]}
+            else:
+                at_mass, ns, nr = cols
+                s08[name]['Isotope'].append(int(at_mass))
+                s08[name]['N[s]'].append(float(ns))
+                s08[name]['N[r]'].append(float(nr))
 
-fin.close()
-# ---------------------
-
-
-for e in s08.keys():
-    for k in ['N[r]', 'N[s]', 'Isotope']:
-        s08[e][k] = np.array(s08[e][k])
-
-
-# Calculate the fraction of each element produced in the r- and s-processes
-# ('fraction[r]' and 'fraction[s]') and the fraction of each isotope that
-# comes from the r- or s-processes relative to the total amount of the element
-# produced in the r- or s-processes('isotopic_fraction[r]' and
-# 'isotopic_fraction[s]')
-for e in s08.keys():
-    ncap_tot = np.sum(s08[e]['N[r]'].sum() + s08[e]['N[s]'].sum())
-    s08[e]['fraction[r]'] = s08[e]['N[r]'].sum() / ncap_tot
-    s08[e]['fraction[s]'] = s08[e]['N[s]'].sum() / ncap_tot
-    if s08[e]['N[r]'].sum() > 0.:
-        s08[e]['isotopic_fraction[r]'] = s08[e]['N[r]'] / s08[e]['N[r]'].sum()
-    else:
-        s08[e]['isotopic_fraction[r]'] = np.zeros(len(s08[e]['N[r]']))
-    if s08[e]['N[s]'].sum() > 0.:
-        s08[e]['isotopic_fraction[s]'] = s08[e]['N[s]'] / s08[e]['N[s]'].sum()
-    else:
-        s08[e]['isotopic_fraction[s]'] = np.zeros(len(s08[e]['N[s]']))
+    fin.close()
+    # ---------------------
 
 
-pickle_write(s08, join(path_yldgen, 'sneden08.pck'))
+    for e in s08.keys():
+        for k in ['N[r]', 'N[s]', 'Isotope']:
+            s08[e][k] = np.array(s08[e][k])
+
+
+    # Calculate the fraction of each element produced in the r- and s-processes
+    # ('fraction[r]' and 'fraction[s]') and the fraction of each isotope that
+    # comes from the r- or s-processes relative to the total amount of the element
+    # produced in the r- or s-processes('isotopic_fraction[r]' and
+    # 'isotopic_fraction[s]')
+    for e in s08.keys():
+        ncap_tot = np.sum(s08[e]['N[r]'].sum() + s08[e]['N[s]'].sum())
+        s08[e]['fraction[r]'] = s08[e]['N[r]'].sum() / ncap_tot
+        s08[e]['fraction[s]'] = s08[e]['N[s]'].sum() / ncap_tot
+        if s08[e]['N[r]'].sum() > 0.:
+            s08[e]['isotopic_fraction[r]'] = s08[e]['N[r]'] / s08[e]['N[r]'].sum()
+        else:
+            s08[e]['isotopic_fraction[r]'] = np.zeros(len(s08[e]['N[r]']))
+        if s08[e]['N[s]'].sum() > 0.:
+            s08[e]['isotopic_fraction[s]'] = s08[e]['N[s]'] / s08[e]['N[s]'].sum()
+        else:
+            s08[e]['isotopic_fraction[s]'] = np.zeros(len(s08[e]['N[s]']))
+
+
+    pickle_write(s08, join(path_yldgen, 'sneden08.pck'))
