@@ -71,7 +71,8 @@ class Abundances:
         self.ind_element = {}
         for item in self.elements:
             self.ind_element[item] = np.where(self.sym == item)[0]
-
+        self.elements_out = self.elements
+            
     def load_solar_abund(self, source='lodders'):
         """Read in solar abundances.
 
@@ -118,7 +119,8 @@ class Abundances:
         self.xh_all = np.subtract(self.xh_abs.T, self.solar_h).T
         self.feh = self.xh_all[np.where(self.elements == 'Fe')][0]
         self.xfe_all = np.subtract(self.xfe_abs.T, self.solar_fe).T
-
+        self.xfe = self.xfe_all
+        
     def select_elements(self, el=np.array(['C', 'N', 'O', 'Na', 'Mg', 'Al',
                                            'Si', 'S', 'K', 'Ca', 'Ti', 'V',
                                            'Cr', 'Mn', 'Co', 'Ni'])):

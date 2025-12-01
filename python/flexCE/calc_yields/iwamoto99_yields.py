@@ -21,7 +21,8 @@ path_i99 = join(path_yields, 'iwamoto99')
 sys.path.append(path_fileio)
 # -------------------
 
-from pickle_io import pickle_write
+#from pickle_io import pickle_write
+from .fileio.pickle_io import pickle_write
 
 
 # ---- Iwamoto et al. (1999) W70 SNIa yields ----

@@ -105,22 +105,20 @@ def output(path, sim_id, gal, abund):
     txt_write(path_out, sim_id, gal, abund)
 
     # Output to FITS file
-    dt = np.dtype([('t',float),('FeH',float),('CFe',float),('NFe',float),('OFe',float),('NaFe',float),
-                   ('MgFe',float),('AlFe',float),('SiFe',float),('PFe',float),('SFe',float),('KFe',float),
-                   ('CaFe',float),('TiFe',float),('VFe',float),('CrFe',float),('MnFe',float),('CoFe',float),
-                   ('NiFe',float)])
+    dt = [('t',float),('FeH',float)]
+    for i in range(len(abund.elements)):
+        if abund.elements[i] != 'Fe':
+        dt.append((abund.elements[i]+'Fe',float))
     n = len(abund.xfe[0])
-    data = np.zeros(n,dtype=dt)
-    # xfe or xfe_all??
-    elem = ['C','N','O','Na','Mg','Al','P','S','K','Ca','Ti','V','Cr','Mn','Co','Ni']
-    for e in elem:
-        ind = np.where(abund.elements == e)[0][0]
-        data[e+'Fe'] = abund.xfe_all[ind]
+    data = np.zeros(n,dtype=np.dtype(dt))
+    for e in abund.elements:
+        if e != 'Fe':
+            ind = np.where(abund.elements == e)[0][0]
+            data[e+'Fe'] = abund.xfe_all[ind] 
     data['t'] = abund.t[0:n]
     data['FeH'] = abund.feh
     outfile = join(path_sim, ''.join(('ab' + sim_id + '.fits')))
     fits.writeto(outfile,data,overwrite=True)
-
     
 
 def run(config,path_out=None):

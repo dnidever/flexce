@@ -27,9 +27,9 @@ path_c06 = join(path_yields, 'cescutti06')
 sys.path.append(path_fileio)
 # -------------------
 
-from pickle_io import pickle_read
-from pickle_io import pickle_write
-
+#from pickle_io import pickle_read
+#from pickle_io import pickle_write
+from .fileio.pickle_io import pickle_write,pickle_read
 
 # ---- Load Data ----
 data_in = pd.read_csv(join(path_c06, 'cescutti06_rprocess.txt'),

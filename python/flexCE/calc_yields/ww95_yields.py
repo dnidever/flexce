@@ -40,9 +40,9 @@ path_ww95_half_fe = join(path_ww95, 'half_fe')
 sys.path.append(path_fileio)
 # -------------------
 
-from pickle_io import pickle_read
-from pickle_io import pickle_write
-
+#from pickle_io import pickle_read
+#from pickle_io import pickle_write
+from .fileio.pickle_io import pickle_write,pickle_read
 
 if not os.path.isdir(path_ww95_orig):
     os.mkdir(path_ww95_orig)

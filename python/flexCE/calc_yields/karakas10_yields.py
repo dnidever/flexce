@@ -28,7 +28,8 @@ path_k10 = join(path_yields, 'karakas10', 'iso_yields')
 sys.path.append(path_fileio)
 #-------------------
 
-from pickle_io import pickle_write
+#from pickle_io import pickle_write
+from .fileio.pickle_io import pickle_write
 
 #----- Read in Computed Yields -----
 
