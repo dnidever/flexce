@@ -33,7 +33,7 @@ sys.path.append(path_fileio)
 # -------------------
 
 #from pickle_io import pickle_write
-from .fileio.pickle_io import pickle_write
+from ..fileio.pickle_io import pickle_write
 
 # ---- Read in Computed Yields -----
 # CL04
