@@ -106,7 +106,7 @@ def output(path, sim_id, gal, abund):
     dt = [('t',float),('FeH',float)]
     for i in range(len(abund.elements)):
         if abund.elements[i] != 'Fe':
-        dt.append((abund.elements[i]+'Fe',float))
+            dt.append((abund.elements[i]+'Fe',float))
     n = len(abund.xfe[0])
     data = np.zeros(n,dtype=np.dtype(dt))
     for e in abund.elements:
