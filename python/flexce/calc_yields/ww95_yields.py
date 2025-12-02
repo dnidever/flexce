@@ -410,8 +410,8 @@ def run():
 
     # -- Thielemann, Nomoto, & Yokoi (1986) detailed nucleosynthesis calculations of
     # -- the Nomoto et al. (1984) W7 SN Ia model
-    tny86_final = np.zeros(n_species)
-    tny86_final[ind_sp] = tnyIa
+    #tny86_final = np.zeros(n_species)
+    #tny86_final[ind_sp] = tnyIa
 
     # --------------------------------
 

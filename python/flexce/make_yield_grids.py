@@ -22,18 +22,20 @@ path_yields = join(path_data, 'yields')
 path_calc_yields = join(path_flexce, 'calc_yields')
 # ---------------------
 
+from .calc_yields import busso01_yields,cescutti06_yields,iwamoto99_yields,karakas10_yields,limongi_chieffi_yields,sneden08,ww95_yields
+
 def make_yield_grids(make_ww95=False):
 
     print('\nGenerating pickled yield grids...\n')
     
     ylds = {
-        'busso01': {},
-        'cescutti06': {},
-        'iwamoto99': {},
-        'karakas10': {},
-        'limongi06': {},
-        'sneden08': {},
-        'ww95': {}
+        'busso01': {'module':busso01_yields},
+        'cescutti06': {'module':cescutti06_yields},
+        'iwamoto99': {'module':iwamoto99_yields},
+        'karakas10': {'module':karakas10_yields},
+        'limongi06': {'module':limongi_chieffi_yields},
+        'sneden08': {'module':sneden08},
+        'ww95': {'module':ww95_yields}
     }
 
     for k in sorted(ylds.keys()):
@@ -75,8 +77,11 @@ def make_yield_grids(make_ww95=False):
                 if not make_ww95:
                     continue
             print('\ngenerating yields: ', k)
-            os.system('python ' + join(path_calc_yields, ylds[k]['script']))
-
+            #os.system('python ' + join(path_calc_yields, ylds[k]['script']))
+            mod = ylds[k]['module']
+            mod.run()
+            
+            
 if __name__ == '__main__':
 
     make_ww95 = False
